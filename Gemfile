@@ -46,3 +46,5 @@ group :development do
   # gem "spring"
 end
 
+# CORS
+gem 'rack-cors', '~> 1.1.1'
