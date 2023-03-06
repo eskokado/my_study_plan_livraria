@@ -8,5 +8,6 @@ RSpec.describe Supplier, type: :model do
 
   context 'Validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { should have_one(:account) }
   end
 end
