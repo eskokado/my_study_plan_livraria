@@ -8,5 +8,6 @@ RSpec.describe Assembly, type: :model do
 
   context 'Validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { should have_many(:assemblies_parts) }
   end
 end
