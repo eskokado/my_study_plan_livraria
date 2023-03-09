@@ -39,5 +39,10 @@ RSpec.describe "Books", type: :request do
       post url, params: book_invalid_params
       expect(body_json['errors']['fields']).to have_key('published_at')
     end
+
+    it 'returns unprocessable_entity status' do
+      post url, params: book_invalid_params
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 end
