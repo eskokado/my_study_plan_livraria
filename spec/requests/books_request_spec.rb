@@ -18,5 +18,9 @@ RSpec.describe "Books", type: :request do
       expect(body_json['book']).to eq expected_book
     end
 
+    it 'returns success status' do
+      post url, params: book_params
+      expect(response).to have_http_status(:ok)
+    end
   end
 end
