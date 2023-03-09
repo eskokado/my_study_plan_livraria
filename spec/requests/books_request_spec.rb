@@ -34,5 +34,10 @@ RSpec.describe "Books", type: :request do
         post url, params: book_invalid_params
       end.to_not change(Book, :count)
     end
+
+    it 'returns error message' do
+      post url, params: book_invalid_params
+      expect(body_json['errors']['fields']).to have_key('published_at')
+    end
   end
 end
