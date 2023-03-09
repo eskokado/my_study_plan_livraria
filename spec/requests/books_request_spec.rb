@@ -23,4 +23,16 @@ RSpec.describe "Books", type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  context "with invalid params" do
+    let(:book_invalid_params) do
+      { book: attributes_for(:book, published_at: nil) }.to_json
+    end
+
+    it 'does not add a new Book' do
+      expect do
+        post url, params: book_invalid_params
+      end.to_not change(Book, :count)
+    end
+  end
 end
