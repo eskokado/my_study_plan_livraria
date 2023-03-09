@@ -11,6 +11,7 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:name, :published_at, :author_id)
+    return {} unless params.has_key?(:book)
+    params.require(:book).permit(:id, :published_at, :author_id)
   end
 end
