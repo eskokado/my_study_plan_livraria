@@ -4,7 +4,7 @@ RSpec.describe "Books", type: :request do
   let(:url) { "/books" }
 
   context "with valid params" do
-    let(:book_params) { { book: attributes_for(:book) }.to_json }
+    let(:book_params) { { book: attributes_for(:book) } }
 
     it 'adds a new Book' do
       expect do
@@ -20,7 +20,7 @@ RSpec.describe "Books", type: :request do
 
     it 'returns success status' do
       post url, params: book_params
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:created)
     end
   end
 
