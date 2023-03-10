@@ -20,5 +20,18 @@ RSpec.describe "Suppliers", type: :request do
       end
     end
 
+    context "with params invalids" do
+      let(:supplier_params) { attributes_for(:supplier, name: "") }
+      let(:account_params) { attributes_for(:account, account_number: "") }
+      let(:invalid_params) { { supplier: supplier_params, account: account_params } }
+
+      it "return an error no process" do
+        post url, params: invalid_params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq("application/json; charset=utf-8")
+        expect(response.body).to include("Name can't be blank", "Account number can't be blank")
+      end
+    end
   end
 end
