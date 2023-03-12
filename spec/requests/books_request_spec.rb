@@ -16,6 +16,11 @@ RSpec.describe BooksController, type: :controller do
         post :create, params: { book: book_params }
         expect(response).to have_http_status(:created)
       end
+
+      it "return given of book created" do
+        post :create, params: { book: book_params }
+        expect(response.body).to include(book_params[:published_at].to_s)
+      end
     end
   end
 end
