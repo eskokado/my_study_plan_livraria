@@ -21,7 +21,21 @@ RSpec.describe AuthorsController, type: :controller do
         expect(response.body).to include('J.K. Rowling')
       end
     end
+
+    context 'with invalid parameters' do
+      let(:invalid_params) { { author: { name: nil } } }
+
+      it 'does not create a new author' do
+        expect {
+          post :create, params: invalid_params
+        }.to_not change(Author, :count)
+      end
+    end
   end
 end
+
+
+
+
 
 
