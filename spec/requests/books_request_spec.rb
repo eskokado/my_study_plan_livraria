@@ -1,48 +1,47 @@
 require 'rails_helper'
 
-RSpec.describe "Books", type: :request do
-  let(:url) { "/books" }
+RSpec.describe BooksController, type: :controller do
+  describe "#create" do
+    context "with params valids" do
+      let(:author) { create(:author) }
+      let(:book_params) { attributes_for(:book, author_id: author.id) }
 
-  context "with valid params" do
-    let(:book_params) { { book: attributes_for(:book) } }
+      it "create new an book" do
+        expect {
+          post :create, params: { book: book_params }
+        }.to change(Book, :count).by(1)
+      end
 
-    it 'adds a new Book' do
-      expect do
-        post url, params: book_params
-      end.to change(Book, :count).by(1)
+      it "return status created" do
+        post :create, params: { book: book_params }
+        expect(response).to have_http_status(:created)
+      end
+
+      it "return given of book created" do
+        post :create, params: { book: book_params }
+        expect(response.body).to include(book_params[:published_at].to_s)
+      end
     end
 
-    it 'returns last added Book' do
-      post url, params: book_params
-      expected_book = Book.last.as_json(only: %i(id name))
-      expect(body_json['book']).to eq expected_book
-    end
+    context "with params invalids" do
+      let(:book_params) { attributes_for(:book, published_at: nil) }
 
-    it 'returns success status' do
-      post url, params: book_params
-      expect(response).to have_http_status(:created)
-    end
-  end
+      it "does not create a new book" do
+        expect {
+          post :create, params: { book: book_params }
+        }.not_to change(Book, :count)
+      end
 
-  context "with invalid params" do
-    let(:book_invalid_params) do
-      { book: attributes_for(:book, published_at: nil) }.to_json
-    end
+      it "return status :unprocessable_entity" do
+        post :create, params: { book: book_params }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
 
-    it 'does not add a new Book' do
-      expect do
-        post url, params: book_invalid_params
-      end.to_not change(Book, :count)
-    end
-
-    it 'returns error message' do
-      post url, params: book_invalid_params
-      expect(body_json['errors']['fields']).to have_key('published_at')
-    end
-
-    it 'returns unprocessable_entity status' do
-      post url, params: book_invalid_params
-      expect(response).to have_http_status(:unprocessable_entity)
+      it "returns an errors of validation" do
+        post :create, params: { book: book_params }
+        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"author\":[\"must exist\"]}}")
+      end
     end
   end
 end
+

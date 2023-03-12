@@ -1,14 +1,14 @@
 class BooksController < ApplicationController
-
-  # POST /api/v1/books
   def create
-    @book = Book.new
-    @book.attributes = book_params
-    @book.save!
-    render :show
-  rescue
-    render json: { errors: { fields: @book.errors.messages } }, status: :unprocessable_entity
+    book = Book.new(book_params)
+
+    if book.save
+      render json: book, status: :created
+    else
+      render json: { errors: book.errors.messages }, status: :unprocessable_entity
+    end
   end
+
 
   def book_params
     return {} unless params.has_key?(:book)
