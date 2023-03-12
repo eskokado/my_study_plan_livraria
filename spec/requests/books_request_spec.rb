@@ -11,6 +11,11 @@ RSpec.describe BooksController, type: :controller do
           post :create, params: { book: book_params }
         }.to change(Book, :count).by(1)
       end
+
+      it "return status created" do
+        post :create, params: { book: book_params }
+        expect(response).to have_http_status(:created)
+      end
     end
   end
 end
