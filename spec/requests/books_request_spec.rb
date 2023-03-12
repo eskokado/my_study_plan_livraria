@@ -36,6 +36,12 @@ RSpec.describe BooksController, type: :controller do
         post :create, params: { book: book_params }
         expect(response).to have_http_status(:unprocessable_entity)
       end
+
+      it "returns an errors of validation" do
+        post :create, params: { book: book_params }
+        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"author\":[\"must exist\"]}}")
+      end
     end
   end
 end
+
