@@ -35,6 +35,12 @@ RSpec.describe AuthorsController, type: :controller do
         post :create, params: invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
       end
+
+      it 'returns a JSON with errors' do
+        post :create, params: invalid_params
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response.body).to include("{\"name\":[\"can't be blank\"]}")
+      end
     end
   end
 end
