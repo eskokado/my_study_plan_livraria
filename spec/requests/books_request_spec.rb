@@ -22,5 +22,15 @@ RSpec.describe BooksController, type: :controller do
         expect(response.body).to include(book_params[:published_at].to_s)
       end
     end
+
+    context "with params invalids" do
+      let(:book_params) { attributes_for(:book, published_at: nil) }
+
+      it "does not create a new book" do
+        expect {
+          post :create, params: { book: book_params }
+        }.not_to change(Book, :count)
+      end
+    end
   end
 end
