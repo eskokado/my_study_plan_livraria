@@ -31,6 +31,11 @@ RSpec.describe BooksController, type: :controller do
           post :create, params: { book: book_params }
         }.not_to change(Book, :count)
       end
+
+      it "return status :unprocessable_entity" do
+        post :create, params: { book: book_params }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end
