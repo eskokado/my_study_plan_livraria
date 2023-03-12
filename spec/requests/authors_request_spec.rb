@@ -14,6 +14,12 @@ RSpec.describe AuthorsController, type: :controller do
         post :create, params: valid_params
         expect(response).to have_http_status(:created)
       end
+
+      it 'returns the created author as JSON' do
+        post :create, params: valid_params
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response.body).to include('J.K. Rowling')
+      end
     end
   end
 end
