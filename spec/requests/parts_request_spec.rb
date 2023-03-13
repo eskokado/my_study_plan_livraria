@@ -30,6 +30,13 @@ RSpec.describe PartsController, type: :controller do
           post :create, params: { supplier_id: supplier.id, part: invalid_attributes }
         }.to_not change(Part, :count)
       end
+
+      it "returns an unprocessable_entity response with JSON body" do
+        post :create, params: { supplier_id: supplier.id, part: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)['errors']['part_number']).to include("can't be blank")
+      end
     end
   end
 end
