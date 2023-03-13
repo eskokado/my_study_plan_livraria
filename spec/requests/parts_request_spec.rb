@@ -21,5 +21,15 @@ RSpec.describe PartsController, type: :controller do
         expect(JSON.parse(response.body)['part']['supplier_id']).to eq(supplier.id)
       end
     end
+
+    context "with invalid params" do
+      let(:invalid_attributes) { { part_number: nil }}
+
+      it "does not create a new Part" do
+        expect {
+          post :create, params: { supplier_id: supplier.id, part: invalid_attributes }
+        }.to_not change(Part, :count)
+      end
+    end
   end
 end
