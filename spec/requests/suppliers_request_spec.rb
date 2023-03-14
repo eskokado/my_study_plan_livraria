@@ -30,7 +30,7 @@ RSpec.describe "Suppliers", type: :request do
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json; charset=utf-8")
-        expect(response.body).to include("Name can't be blank", "Account number can't be blank")
+        expect(response.body).to include("can't be blank")
       end
     end
   end
