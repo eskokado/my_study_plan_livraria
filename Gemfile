@@ -20,6 +20,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'rubocop'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'json_spec'
+  gem 'rspec-json_matchers', require: false
+  gem 'rspec-json_expectations'
 end
 
 group :development do
