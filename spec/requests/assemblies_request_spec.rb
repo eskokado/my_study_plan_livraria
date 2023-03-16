@@ -32,7 +32,18 @@ RSpec.describe "Assemblies", type: :request do
           post assemblies_path, params: { assembly: valid_attributes }
         }.to change(Assembly, :count).by(1)
       end
-   end
+    end
+
+    context "with params invalids" do
+      let(:invalid_attributes) {
+        attributes_for(:assembly_with_parts, name: nil)
+      }
+
+      it "does not create a new Assembly with parts" do
+        expect {
+          post assemblies_path, params: { assembly: invalid_attributes }
+        }.to_not change(Author, :count)
+      end
+    end
   end
 end
-
