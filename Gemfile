@@ -38,3 +38,4 @@ gem 'rack-cors', '~> 1.1.1'
 gem 'jbuilder', '~> 2.10.1'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'cpf_cnpj'
