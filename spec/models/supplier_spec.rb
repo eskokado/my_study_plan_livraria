@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Supplier, type: :model do
   it 'is valid all attributes' do
-    supplier = create(:supplier)
+    supplier = build(:supplier, cnpj: CNPJ.generate)
     expect(supplier).to be_valid
   end
 
