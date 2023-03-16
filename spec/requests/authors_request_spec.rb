@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe AuthorsController, type: :controller do
   describe 'POST #create' do
     context 'with valid parameters' do
-      let(:valid_params) { { author: { name: 'J.K. Rowling' } } }
+      let(:valid_params) { { author: { name: 'J.K. Rowling', cpf: CPF.generate } } }
 
       it 'creates a new author' do
         expect {
@@ -23,7 +23,7 @@ RSpec.describe AuthorsController, type: :controller do
     end
 
     context 'with invalid parameters' do
-      let(:invalid_params) { { author: { name: nil } } }
+      let(:invalid_params) { { author: { name: nil, cpf: "12345678901234" } } }
 
       it 'does not create a new author' do
         expect {
