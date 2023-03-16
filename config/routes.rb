@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :books
   resources :suppliers
   resources :parts
+  resources :assemblies
 end
