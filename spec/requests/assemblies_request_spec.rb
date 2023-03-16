@@ -54,6 +54,16 @@ RSpec.describe "Assemblies", type: :request do
           post assemblies_path, params: { assembly: invalid_attributes }
         }.to_not change(Author, :count)
       end
+
+      let(:valid_attributes) {
+        attributes_for(:assembly_with_parts_and_books, name: nil)
+      }
+
+      it "does not create a new Assembly with parts and book" do
+        expect {
+          post assemblies_path, params: { assembly: invalid_attributes }
+        }.to_not change(Author, :count)
+      end
     end
   end
 end
