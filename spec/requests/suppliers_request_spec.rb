@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Suppliers", type: :request do
+RSpec.describe "SuppliersController", type: :request do
   let(:url) { "/suppliers" }
 
   describe "POST #create" do
