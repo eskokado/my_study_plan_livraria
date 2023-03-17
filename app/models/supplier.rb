@@ -1,15 +1,17 @@
 class Supplier < ApplicationRecord
   validates :name,  presence: true
   validates :cnpj, presence: true
-  validate :valid_cnpj?
 
   has_many :parts
 
   has_one :account
 
-  private
-  def valid_cnpj?
+  validate :validate_cnpj
+
+  def validate_cnpj
     cnpj = CNPJ.new(self.cnpj)
-    cnpj.valid?
+    unless cnpj.valid?
+      errors.add(:cnpj, "is invalid")
+    end
   end
 end
