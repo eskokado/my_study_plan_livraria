@@ -21,7 +21,7 @@ RSpec.describe "SuppliersController", type: :request do
     end
 
     context "with params invalids" do
-      let(:supplier_params) { attributes_for(:supplier, name: "", cpnj: "12345678901234") }
+      let(:supplier_params) { attributes_for(:supplier, name: "", cnpj: "12345678901234") }
       let(:account_params) { attributes_for(:account, account_number: "", verifier_digit: "") }
       let(:invalid_params) { { supplier: supplier_params, account: account_params } }
 
@@ -33,5 +33,22 @@ RSpec.describe "SuppliersController", type: :request do
         expect(response.body).to include("can't be blank")
       end
     end
+
+    context "with invalids cnpj" do
+      let(:supplier_params) { attributes_for(:supplier, name: "Error cnpj", cnpj: "12345678901234") }
+      let(:account_params) { attributes_for(:account, account_number: "account error", verifier_digit: "32") }
+      let(:invalid_params) { { supplier: supplier_params, account: account_params } }
+
+      it "return an error no process" do
+        post url, params: invalid_params
+
+        puts response.body.inspect
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq("application/json; charset=utf-8")
+        expect(response.body).to include("is invalid")
+      end
+    end
+
   end
 end
