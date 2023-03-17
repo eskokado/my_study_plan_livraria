@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new(supplier_params)
     @account = @supplier.build_account(account_params)
 
-    if @supplier.save && @account.save
+    if @supplier.valid? && @account.valid? && @supplier.save && @account.save
       render json: { supplier: @supplier, account: @account }, status: :created
     else
       render json: { errors: @supplier.errors.messages.merge(@account.errors.messages) }, status: :unprocessable_entity
@@ -21,9 +21,4 @@ class SuppliersController < ApplicationController
     params.require(:account).permit(:account_number, :verifier_digit)
   end
 
-  def validate_cnpj
-    unless @supplier.valid_cnpj?
-      render json: { error: "Invalid CNPJ" }, status: :unprocessable_entity
-    end
-  end
 end
