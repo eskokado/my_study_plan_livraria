@@ -5,8 +5,8 @@ RSpec.describe "Suppliers", type: :request do
 
   describe "POST #create" do
     context "with params valids" do
-      let(:supplier_params) { attributes_for(:supplier, cpnj: CNPJ.generate) }
-      let(:account_params) { attributes_for(:account) }
+      let(:supplier_params) { attributes_for(:supplier, cnpj: CNPJ.generate) }
+      let(:account_params) { attributes_for(:account, account_number: "123456", verifier_digit: "7") }
       let(:valid_params) { { supplier: supplier_params, account: account_params } }
 
       it "create an new suppliers with an new account" do
@@ -22,7 +22,7 @@ RSpec.describe "Suppliers", type: :request do
 
     context "with params invalids" do
       let(:supplier_params) { attributes_for(:supplier, name: "", cpnj: "12345678901234") }
-      let(:account_params) { attributes_for(:account, account_number: "") }
+      let(:account_params) { attributes_for(:account, account_number: "", verifier_digit: "") }
       let(:invalid_params) { { supplier: supplier_params, account: account_params } }
 
       it "return an error no process" do

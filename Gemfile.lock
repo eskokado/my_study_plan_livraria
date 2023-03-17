@@ -91,6 +91,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    iban-tools (1.1.0)
     isbn (2.0.11)
     jbuilder (2.10.2)
       activesupport (>= 5.0.0)
@@ -236,6 +237,7 @@ DEPENDENCIES
   cpf_cnpj
   factory_bot_rails
   faker
+  iban-tools
   isbn (~> 2.0, >= 2.0.11)
   jbuilder (~> 2.10.1)
   json_spec

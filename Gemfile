@@ -41,3 +41,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'cpf_cnpj'
 
 gem 'isbn', '~> 2.0', '>= 2.0.11'
+
+gem 'iban-tools'

@@ -6,7 +6,6 @@ class SuppliersController < ApplicationController
     if @supplier.save && @account.save
       render json: { supplier: @supplier, account: @account }, status: :created
     else
-      puts @account.errors.full_messages
       render json: { errors: @supplier.errors.messages.merge(@account.errors.messages) }, status: :unprocessable_entity
     end
   end
