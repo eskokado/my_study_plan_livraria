@@ -4,7 +4,7 @@ RSpec.describe BooksController, type: :controller do
   describe "#create" do
     context "with params valids" do
       let(:author) { create(:author) }
-      let(:book_params) { attributes_for(:book, author_id: author.id) }
+      let(:book_params) { attributes_for(:book, author_id: author.id, isbn: Faker::Code.isbn(base: 13)) }
 
       it "create new an book" do
         expect {
@@ -24,7 +24,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     context "with params invalids" do
-      let(:book_params) { attributes_for(:book, published_at: nil) }
+      let(:book_params) { attributes_for(:book, published_at: nil, isbn: nil) }
 
       it "does not create a new book" do
         expect {
@@ -39,7 +39,7 @@ RSpec.describe BooksController, type: :controller do
 
       it "returns an errors of validation" do
         post :create, params: { book: book_params }
-        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"author\":[\"must exist\"]}}")
+        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"isbn\":[\"can't be blank\"],\"author\":[\"must exist\"]}}")
       end
     end
   end
