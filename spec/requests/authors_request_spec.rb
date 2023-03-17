@@ -39,7 +39,7 @@ RSpec.describe AuthorsController, type: :controller do
       it 'returns a JSON with errors' do
         post :create, params: invalid_params
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response.body).to include("{\"name\":[\"can't be blank\"]}")
+        expect(response.body).to include("{\"name\":[\"can't be blank\"],\"cpf\":[\"is invalid\"]}}")
       end
     end
   end
