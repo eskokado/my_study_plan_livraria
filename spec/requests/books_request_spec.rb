@@ -39,7 +39,7 @@ RSpec.describe BooksController, type: :controller do
 
       it "returns an errors of validation" do
         post :create, params: { book: book_params }
-        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"isbn\":[\"can't be blank\"],\"author\":[\"must exist\"]}}")
+        expect(response.body).to include("{\"errors\":{\"published_at\":[\"can't be blank\"],\"isbn\":[\"can't be blank\",\"is invalid\"],\"author\":[\"must exist\"]}}")
       end
     end
   end
