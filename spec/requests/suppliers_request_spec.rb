@@ -42,8 +42,6 @@ RSpec.describe "SuppliersController", type: :request do
       it "return an error no process" do
         post url, params: invalid_params
 
-        puts response.body.inspect
-
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json; charset=utf-8")
         expect(response.body).to include("is invalid")
