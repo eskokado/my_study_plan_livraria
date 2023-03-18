@@ -1,5 +1,6 @@
 class Part < ApplicationRecord
   validates :part_number, presence: true
+  validates :name, presence: true
 
   belongs_to :supplier
 
