@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Suppliers", type: :request do
+RSpec.describe "SuppliersController", type: :request do
   let(:url) { "/suppliers" }
 
   describe "POST #create" do
     context "with params valids" do
-      let(:supplier_params) { attributes_for(:supplier) }
+      let(:supplier_params) { attributes_for(:supplier, cnpj: CNPJ.generate) }
       let(:account_params) { attributes_for(:account) }
       let(:valid_params) { { supplier: supplier_params, account: account_params } }
 
@@ -21,8 +21,8 @@ RSpec.describe "Suppliers", type: :request do
     end
 
     context "with params invalids" do
-      let(:supplier_params) { attributes_for(:supplier, name: "") }
-      let(:account_params) { attributes_for(:account, account_number: "") }
+      let(:supplier_params) { attributes_for(:supplier, name: "", cnpj: "12345678901234") }
+      let(:account_params) { attributes_for(:account, account_number: "", verifier_digit: "") }
       let(:invalid_params) { { supplier: supplier_params, account: account_params } }
 
       it "return an error no process" do
@@ -33,5 +33,20 @@ RSpec.describe "Suppliers", type: :request do
         expect(response.body).to include("can't be blank")
       end
     end
+
+    context "with invalids cnpj" do
+      let(:supplier_params) { attributes_for(:supplier, name: "Error cnpj", cnpj: "12345678901234") }
+      let(:account_params) { attributes_for(:account, account_number: "account error", verifier_digit: "32") }
+      let(:invalid_params) { { supplier: supplier_params, account: account_params } }
+
+      it "return an error no process" do
+        post url, params: invalid_params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq("application/json; charset=utf-8")
+        expect(response.body).to include("is invalid")
+      end
+    end
+
   end
 end

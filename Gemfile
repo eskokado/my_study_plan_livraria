@@ -14,7 +14,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 4.0.1'
@@ -23,6 +23,8 @@ group :development, :test do
   gem 'json_spec'
   gem 'rspec-json_matchers', require: false
   gem 'rspec-json_expectations'
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
 
 group :development do
@@ -38,3 +40,8 @@ gem 'rack-cors', '~> 1.1.1'
 gem 'jbuilder', '~> 2.10.1'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'cpf_cnpj'
+
+gem 'isbn', '~> 2.0', '>= 2.0.11'
+
+gem 'iban-tools'

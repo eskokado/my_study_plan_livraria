@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe AuthorsController, type: :controller do
   describe 'POST #create' do
     context 'with valid parameters' do
-      let(:valid_params) { { author: { name: 'J.K. Rowling' } } }
+      let(:valid_params) { { author: { name: 'J.K. Rowling', cpf: CPF.generate } } }
 
       it 'creates a new author' do
         expect {
@@ -23,7 +23,7 @@ RSpec.describe AuthorsController, type: :controller do
     end
 
     context 'with invalid parameters' do
-      let(:invalid_params) { { author: { name: nil } } }
+      let(:invalid_params) { { author: { name: nil, cpf: "12345678901234" } } }
 
       it 'does not create a new author' do
         expect {
@@ -39,7 +39,7 @@ RSpec.describe AuthorsController, type: :controller do
       it 'returns a JSON with errors' do
         post :create, params: invalid_params
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response.body).to include("{\"name\":[\"can't be blank\"]}")
+        expect(response.body).to include("{\"name\":[\"can't be blank\"],\"cpf\":[\"is invalid\"]}}")
       end
     end
   end

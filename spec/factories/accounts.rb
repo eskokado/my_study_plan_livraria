@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :account do
-    account_number { Faker::Number.number(digits: 10).to_s }
+    account_number { "000010009795493"}
+    verifier_digit { "97" }
     supplier
   end
 end
