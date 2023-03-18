@@ -8,6 +8,7 @@ RSpec.describe Account, type: :model do
 
   context 'Validations' do
     it { is_expected.to validate_presence_of(:account_number) }
+    it { is_expected.to validate_presence_of(:verifier_digit) }
     it { is_expected.to belong_to :supplier }
   end
 end
