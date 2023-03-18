@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   validates :published_at, presence: true
   validates :isbn, presence: true
+  validates :title, presence: true
 
   belongs_to :author
 
