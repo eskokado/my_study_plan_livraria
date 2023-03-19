@@ -1,5 +1,11 @@
 require 'cpf_cnpj'
 class SuppliersController < ApplicationController
+  def index
+    name = params[:name].present? ? params[:name] : ""
+    @suppliers = Supplier.where("name LIKE ?", "%#{name}%")
+
+    render json: @suppliers
+  end
   def create
     @supplier = Supplier.new(supplier_params)
     @account = @supplier.build_account(account_params)
