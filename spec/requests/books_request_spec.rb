@@ -45,6 +45,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe "GET /books" do
+    let(:parsed_response) { JSON.parse(response.body) }
     context 'when no title is provided as a parameter' do
       let!(:books) { create_list(:book, 3) }
 
@@ -54,6 +55,9 @@ RSpec.describe BooksController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
+      it 'returns a list of all books in descending order of publication date' do
+        expect(parsed_response).to match_array(books.as_json)
+      end
     end
   end
 end
