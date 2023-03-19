@@ -43,5 +43,43 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  describe "GET /books" do
+    let(:parsed_response) { JSON.parse(response.body) }
+    context 'when no title is provided as a parameter' do
+      let!(:books) { create_list(:book, 3) }
+
+      before { get :index }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'returns a list of all books in descending order of publication date' do
+        expect(parsed_response).to match_array(books.as_json)
+      end
+    end
+
+    context 'when a title is provided as a parameter' do
+      let(:matching_title) { 'The Lord of the Rings' }
+      let(:not_matching_title) { 'Harry Potter' }
+      let!(:book_matching_title) { create(:book, title: matching_title) }
+      let!(:book_not_matching_title) { create(:book, title: not_matching_title) }
+
+      before { get :index, params: { title: matching_title } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'returns only books that match the provided title' do
+        expect(parsed_response).to match_array([book_matching_title.as_json])
+      end
+
+      it 'does not return books that do not match the provided title' do
+        expect(parsed_response).not_to include(book_not_matching_title.as_json)
+      end
+    end
+  end
 end
 

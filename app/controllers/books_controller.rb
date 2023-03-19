@@ -1,4 +1,12 @@
 class BooksController < ApplicationController
+  def index
+    if params[:title].present?
+      @books = Book.where('title ILIKE ?', "%#{params[:title]}%").order(published_at: :desc)
+    else
+      @books = Book.all.order(published_at: :desc)
+    end
+    render json: @books
+  end
   def create
     book = Book.new(book_params)
 
@@ -8,7 +16,6 @@ class BooksController < ApplicationController
       render json: { errors: book.errors.messages }, status: :unprocessable_entity
     end
   end
-
 
   def book_params
     return {} unless params.has_key?(:book)
