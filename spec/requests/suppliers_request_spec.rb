@@ -49,4 +49,29 @@ RSpec.describe "SuppliersController", type: :request do
     end
 
   end
+
+  describe "GET #index" do
+    supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+    supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+    supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+
+    context "when name parameter is provided" do
+      it "returns a JSON response with the filtered list of suppliers" do
+
+        get url, params: { name: supplier2.name }
+
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier2.id,
+                                                    "name" => supplier2.name,
+                                                    "cnpj" => supplier2.cnpj,
+                                                    "created_at" => supplier2.created_at.as_json,
+                                                    "updated_at" => supplier2.updated_at.as_json
+                                                  }
+                                                ])
+      end
+    end
+  end
 end
