@@ -75,6 +75,10 @@ RSpec.describe BooksController, type: :controller do
       it 'returns only books that match the provided title' do
         expect(parsed_response).to match_array([book_matching_title.as_json])
       end
+
+      it 'does not return books that do not match the provided title' do
+        expect(parsed_response).not_to include(book_not_matching_title.as_json)
+      end
     end
   end
 end
