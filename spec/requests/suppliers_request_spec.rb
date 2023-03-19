@@ -51,12 +51,12 @@ RSpec.describe "SuppliersController", type: :request do
   end
 
   describe "GET #index" do
-    supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
-    supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
-    supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
 
     context "when name parameter is provided" do
       it "returns a JSON response with the filtered list of suppliers" do
+        supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+        supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+        supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
 
         get url, params: { name: supplier2.name }
 
@@ -71,6 +71,43 @@ RSpec.describe "SuppliersController", type: :request do
                                                     "updated_at" => supplier2.updated_at.as_json
                                                   }
                                                 ])
+      end
+    end
+
+    context "when name parameter is not provided" do
+      let!(:supplier1) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
+      let!(:supplier2) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
+      let!(:supplier3) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
+
+      it "returns a JSON response with the unfiltered list of suppliers" do
+        get url
+
+        # Expect a successful response with a JSON body containing the unfiltered list of suppliers
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier1.id,
+                                                    "name" => supplier1.name,
+                                                    "cnpj" => supplier1.cnpj,
+                                                    "created_at" => supplier1.created_at.as_json,
+                                                    "updated_at" => supplier1.updated_at.as_json
+                                                  },
+                                                  {
+                                                    "id" => supplier2.id,
+                                                    "name" => supplier2.name,
+                                                    "cnpj" => supplier2.cnpj,
+                                                    "created_at" => supplier2.created_at.as_json,
+                                                    "updated_at" => supplier2.updated_at.as_json
+                                                  },
+                                                  {
+                                                    "id" => supplier3.id,
+                                                    "name" => supplier3.name,
+                                                    "cnpj" => supplier3.cnpj,
+                                                    "created_at" => supplier3.created_at.as_json,
+                                                    "updated_at" => supplier3.updated_at.as_json
+                                                  }
+                                                ].as_json)
       end
     end
   end
