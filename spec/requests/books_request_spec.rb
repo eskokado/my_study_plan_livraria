@@ -71,6 +71,10 @@ RSpec.describe BooksController, type: :controller do
       it 'returns http success' do
         expect(response).to have_http_status(:success)
       end
+
+      it 'returns only books that match the provided title' do
+        expect(parsed_response).to match_array([book_matching_title.as_json])
+      end
     end
   end
 end
