@@ -80,6 +80,41 @@ RSpec.describe BooksController, type: :controller do
         expect(parsed_response).not_to include(book_not_matching_title.as_json)
       end
     end
+
+    context 'when no author name is provided as a parameter' do
+      let!(:books) { create_list(:book, 3) }
+
+      before { get :index }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'returns a list of all books in descending order of publication date' do
+        expect(parsed_response).to match_array(books.as_json)
+      end
+    end
+
+    context 'when a author name is provided as a parameter' do
+      let(:author_name) { 'John Smith' }
+      let(:not_author_name) { 'Jane Doe' }
+      let!(:book_author_name) { create(:book, title: author_name) }
+      let!(:book_not_author_name) { create(:book, title: not_author_name) }
+
+      before { get :index, params: { title: author_name } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'returns only books that match the provided author name' do
+        expect(parsed_response).to match_array([book_author_name.as_json])
+      end
+
+      it 'does not return books that do not match the provided author name' do
+        expect(parsed_response).not_to include(book_not_author_name.as_json)
+      end
+    end
   end
 end
 

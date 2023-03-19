@@ -1,9 +1,13 @@
 class BooksController < ApplicationController
   def index
-    if params[:title].present?
-      @books = Book.where('title ILIKE ?', "%#{params[:title]}%").order(published_at: :desc)
+    if params[:author_name].present?
+      @books = Book.joins(:author).where("authors.name ILIKE ?", "%#{params[:author_name]}%").order(published_at: :desc)
     else
-      @books = Book.all.order(published_at: :desc)
+      if params[:title].present?
+        @books = Book.where('title ILIKE ?', "%#{params[:title]}%").order(published_at: :desc)
+      else
+        @books = Book.all.order(published_at: :desc)
+      end
     end
     render json: @books
   end
