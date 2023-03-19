@@ -110,5 +110,26 @@ RSpec.describe "SuppliersController", type: :request do
                                                 ].as_json)
       end
     end
+
+    context "when account_number parameter is provided" do
+      let(:supplier1) { FactoryBot.create(:supplier) }
+      let(:account1) { FactoryBot.create(:account, supplier: supplier1) }
+
+      before { get url, params: { account_number: account1.account_number } }
+
+      it "returns a JSON response with the filtered list of suppliers" do
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier1.id,
+                                                    "name" => supplier1.name,
+                                                    "cnpj" => supplier1.cnpj,
+                                                    "created_at" => supplier1.created_at.as_json,
+                                                    "updated_at" => supplier1.updated_at.as_json
+                                                  }
+                                                ])
+      end
+    end
   end
 end
