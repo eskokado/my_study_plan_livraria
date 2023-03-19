@@ -43,5 +43,18 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  describe "GET /books" do
+    context 'when no title is provided as a parameter' do
+      let!(:books) { create_list(:book, 3) }
+
+      before { get :index }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+    end
+  end
 end
 
