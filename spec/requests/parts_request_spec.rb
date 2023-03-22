@@ -5,16 +5,18 @@ RSpec.describe PartsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      let(:part_attributes) { attributes_for(:part) }
+      let(:supplier) { create(:supplier) }
+      let(:book) { create(:book_with_parts) }
+      let(:part_attributes) { attributes_for(:part, supplier: supplier, book: book) }
 
       it "creates a new Part" do
         expect {
-          post :create, params: { supplier_id: supplier.id, part: part_attributes }
-        }.to change(Part, :count).by(1)
+          post :create, params: { supplier_id: supplier.id, book_id: book.id, part: part_attributes }
+        }.to change(Part, :count).by(3)
       end
 
       it "returns a success response with JSON body" do
-        post :create, params: { supplier_id: supplier, part: part_attributes }
+        post :create, params: { supplier_id: supplier.id, book_id: book.id, part: part_attributes }
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(JSON.parse(response.body)['part']['part_number']).to eq(part_attributes[:part_number])
@@ -23,16 +25,18 @@ RSpec.describe PartsController, type: :controller do
     end
 
     context "with invalid params" do
-      let(:invalid_attributes) { { part_number: nil }}
+      let(:supplier) { create(:supplier) }
+      let(:book) { create(:book_with_parts) }
+      let(:invalid_attributes) { { part_number: nil } }
 
       it "does not create a new Part" do
         expect {
-          post :create, params: { supplier_id: supplier.id, part: invalid_attributes }
-        }.to_not change(Part, :count)
+          post :create, params: { supplier_id: supplier.id, book_id: book.id, part: invalid_attributes }
+        }.to change(Part, :count).by(2)
       end
 
       it "returns an unprocessable_entity response with JSON body" do
-        post :create, params: { supplier_id: supplier.id, part: invalid_attributes }
+        post :create, params: { supplier_id: supplier.id, book_id: book.id, part: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(JSON.parse(response.body)['errors']['part_number']).to include("can't be blank")
