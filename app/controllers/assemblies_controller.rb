@@ -1,4 +1,12 @@
 class AssembliesController < ApplicationController
+
+  def index
+    if params[:part_name].present?
+      @assemblies = Assembly.joins(:part).where("parts.name ILIKE ?", "%#{params[:part_name]}%")
+    else
+      @assemblies = Assembly.all
+    end
+  end
   def create
     @assembly = Assembly.new(assembly_params)
 
