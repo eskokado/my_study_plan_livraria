@@ -7,7 +7,10 @@ FactoryBot.define do
     end
 
     after(:create) do |assembly, evaluator|
-      create_list(:part, evaluator.parts_count, assemblies: [assembly])
+      evaluator.parts_count.times do
+        part = create(:part)
+        create(:assemblies_part, assembly: assembly, part: part)
+      end
     end
   end
 end

@@ -1,4 +1,13 @@
 class AssembliesController < ApplicationController
+
+  def index
+    if params[:part_name].present?
+      @assemblies = Assembly.with_part_name(params[:part_name])
+    else
+      @assemblies = Assembly.all
+    end
+    render json: @assemblies
+  end
   def create
     @assembly = Assembly.new(assembly_params)
 
