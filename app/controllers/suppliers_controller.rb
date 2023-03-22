@@ -1,11 +1,15 @@
 require 'cpf_cnpj'
 class SuppliersController < ApplicationController
   def index
-    if params[:account_number].present?
-      @suppliers = Supplier.joins(:account).where(accounts: { account_number: params[:account_number] })
+    if params[:author_name]
+      @suppliers = Supplier.joins(parts: { book: :author }).where(authors: { name: params[:author_name] }).select("*").distinct
     else
-      name = params[:name].present? ? params[:name] : ""
-      @suppliers = Supplier.where("name LIKE ?", "%#{name}%")
+      if params[:account_number].present?
+        @suppliers = Supplier.joins(:account).where(accounts: { account_number: params[:account_number] })
+      else
+        name = params[:name].present? ? params[:name] : ""
+        @suppliers = Supplier.where("name LIKE ?", "%#{name}%")
+      end
     end
 
     render json: @suppliers
