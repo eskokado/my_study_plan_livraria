@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Assemblies", type: :request do
+RSpec.describe AssembliesController, type: :request do
   describe "POST /assemblies" do
     context "with valid params" do
       let(:valid_attributes) {
@@ -63,6 +63,18 @@ RSpec.describe "Assemblies", type: :request do
         expect {
           post assemblies_path, params: { assembly: invalid_attributes }
         }.to_not change(Author, :count)
+      end
+    end
+  end
+
+  describe "GET /assemblies" do
+    context 'when no part name is provided as a parameter' do
+      let!(:assemblies) { create_list(:assembly, 3) }
+
+      before { get :index }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
       end
     end
   end
