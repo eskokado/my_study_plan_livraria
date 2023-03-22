@@ -1,5 +1,22 @@
 require 'rails_helper'
 
+RSpec.describe SuppliersController, type: :controller do
+  describe "GET #index" do
+    context "when author name parameter is provided" do
+      let!(:supplier) { FactoryBot.create(:supplier) }
+      let!(:author) { FactoryBot.create(:author) }
+      let!(:book) { FactoryBot.create(:book_with_parts, author: author) }
+      let!(:part) { FactoryBot.create(:part_with_book, supplier: supplier, book: book) }
+
+      it "returns a JSON response with the filtered list of suppliers" do
+        get :index, params: { author_name: author.name }
+        expect(response).to have_http_status(:success)
+        expect(assigns(:suppliers)).to include(supplier)
+      end
+    end
+  end
+end
+
 RSpec.describe "SuppliersController", type: :request do
   let(:url) { "/suppliers" }
 
@@ -54,9 +71,9 @@ RSpec.describe "SuppliersController", type: :request do
 
     context "when name parameter is provided" do
       it "returns a JSON response with the filtered list of suppliers" do
-        supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
-        supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
-        supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate)
+        supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
+        supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
+        supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
 
         get url, params: { name: supplier2.name }
 
@@ -75,9 +92,9 @@ RSpec.describe "SuppliersController", type: :request do
     end
 
     context "when name parameter is not provided" do
-      let!(:supplier1) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
-      let!(:supplier2) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
-      let!(:supplier3) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: CNPJ.generate) }
+      let!(:supplier1) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
+      let!(:supplier2) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
+      let!(:supplier3) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
 
       it "returns a JSON response with the unfiltered list of suppliers" do
         get url

@@ -1,8 +1,8 @@
 FactoryBot.define do
-  factory :part do
+  factory :part_with_book, class: Part do
     part_number { Faker::Number.number.to_s }
     name { Faker::Lorem.name }
-    association :book
-    association :supplier
+    book
+    supplier
   end
 end
