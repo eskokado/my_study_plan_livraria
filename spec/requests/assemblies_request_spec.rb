@@ -82,5 +82,16 @@ RSpec.describe AssembliesController, type: :request do
         expect(parsed_response).to match_array(assemblies.as_json)
       end
     end
+
+    context 'when used .with_part_name' do
+      it 'returns assemblies with the specified part name' do
+        assembly = create(:assembly_with_parts)
+        part_with_name = assembly.parts.first
+
+        assembly_with_name = Assembly.with_part_name(part_with_name.name).first
+
+        expect(assembly_with_name).to eq(assembly)
+      end
+    end
   end
 end
