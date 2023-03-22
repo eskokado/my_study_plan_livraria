@@ -68,13 +68,18 @@ RSpec.describe AssembliesController, type: :request do
   end
 
   describe "GET /assemblies" do
+    let(:parsed_response) { JSON.parse(response.body) }
     context 'when no part name is provided as a parameter' do
       let!(:assemblies) { create_list(:assembly, 3) }
 
-      before { get :index }
+      before { get assemblies_path }
 
       it 'returns http success' do
         expect(response).to have_http_status(:success)
+      end
+
+      it 'returns a list of all assemblies' do
+        expect(parsed_response).to match_array(assemblies.as_json)
       end
     end
   end
