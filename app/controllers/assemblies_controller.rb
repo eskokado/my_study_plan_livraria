@@ -6,6 +6,7 @@ class AssembliesController < ApplicationController
     else
       @assemblies = Assembly.all
     end
+    render json: @assemblies
   end
   def create
     @assembly = Assembly.new(assembly_params)
