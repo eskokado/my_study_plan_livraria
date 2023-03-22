@@ -2,7 +2,7 @@ class AssembliesController < ApplicationController
 
   def index
     if params[:part_name].present?
-      @assemblies = Assembly.joins(:part).where("parts.name ILIKE ?", "%#{params[:part_name]}%")
+      @assemblies = Assembly.with_part_name(params[:part_name])
     else
       @assemblies = Assembly.all
     end
