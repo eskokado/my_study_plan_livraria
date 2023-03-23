@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   belongs_to :author
 
   has_many :assemblies_books
+  has_many :assemblies, through: :assemblies_books
 
   validate :validate_isbn
 

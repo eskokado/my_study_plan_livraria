@@ -6,4 +6,5 @@ class Part < ApplicationRecord
   belongs_to :supplier
   belongs_to :book
   has_many :assemblies_parts
+  has_many :assemblies, through: :assemblies_parts
 end
