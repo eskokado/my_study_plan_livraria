@@ -1,5 +1,22 @@
 require 'rails_helper'
 
+RSpec.describe SuppliersController, type: :controller do
+  describe "GET #index" do
+    context "when author name parameter is provided" do
+      let!(:supplier) { FactoryBot.create(:supplier) }
+      let!(:author) { FactoryBot.create(:author) }
+      let!(:book) { FactoryBot.create(:book_with_parts, author: author) }
+      let!(:part) { FactoryBot.create(:part_with_book, supplier: supplier, book: book) }
+
+      it "returns a JSON response with the filtered list of suppliers" do
+        get :index, params: { author_name: author.name }
+        expect(response).to have_http_status(:success)
+        expect(assigns(:suppliers)).to include(supplier)
+      end
+    end
+  end
+end
+
 RSpec.describe "SuppliersController", type: :request do
   let(:url) { "/suppliers" }
 
@@ -48,5 +65,88 @@ RSpec.describe "SuppliersController", type: :request do
       end
     end
 
+  end
+
+  describe "GET #index" do
+
+    context "when name parameter is provided" do
+      it "returns a JSON response with the filtered list of suppliers" do
+        supplier1 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
+        supplier2 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
+        supplier3 = FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false))
+
+        get url, params: { name: supplier2.name }
+
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier2.id,
+                                                    "name" => supplier2.name,
+                                                    "cnpj" => supplier2.cnpj,
+                                                    "created_at" => supplier2.created_at.as_json,
+                                                    "updated_at" => supplier2.updated_at.as_json
+                                                  }
+                                                ])
+      end
+    end
+
+    context "when name parameter is not provided" do
+      let!(:supplier1) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
+      let!(:supplier2) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
+      let!(:supplier3) { FactoryBot.create(:supplier, name: Faker::Company.name, cnpj: Faker::Company.unique.brazilian_company_number(formatted: false)) }
+
+      it "returns a JSON response with the unfiltered list of suppliers" do
+        get url
+
+        # Expect a successful response with a JSON body containing the unfiltered list of suppliers
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier1.id,
+                                                    "name" => supplier1.name,
+                                                    "cnpj" => supplier1.cnpj,
+                                                    "created_at" => supplier1.created_at.as_json,
+                                                    "updated_at" => supplier1.updated_at.as_json
+                                                  },
+                                                  {
+                                                    "id" => supplier2.id,
+                                                    "name" => supplier2.name,
+                                                    "cnpj" => supplier2.cnpj,
+                                                    "created_at" => supplier2.created_at.as_json,
+                                                    "updated_at" => supplier2.updated_at.as_json
+                                                  },
+                                                  {
+                                                    "id" => supplier3.id,
+                                                    "name" => supplier3.name,
+                                                    "cnpj" => supplier3.cnpj,
+                                                    "created_at" => supplier3.created_at.as_json,
+                                                    "updated_at" => supplier3.updated_at.as_json
+                                                  }
+                                                ].as_json)
+      end
+    end
+
+    context "when account_number parameter is provided" do
+      let(:supplier1) { FactoryBot.create(:supplier) }
+      let(:account1) { FactoryBot.create(:account, supplier: supplier1) }
+
+      before { get url, params: { account_number: account1.account_number } }
+
+      it "returns a JSON response with the filtered list of suppliers" do
+        expect(response).to be_successful
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(JSON.parse(response.body)).to eq([
+                                                  {
+                                                    "id" => supplier1.id,
+                                                    "name" => supplier1.name,
+                                                    "cnpj" => supplier1.cnpj,
+                                                    "created_at" => supplier1.created_at.as_json,
+                                                    "updated_at" => supplier1.updated_at.as_json
+                                                  }
+                                                ])
+      end
+    end
   end
 end

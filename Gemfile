@@ -25,6 +25,8 @@ group :development, :test do
   gem 'rspec-json_expectations'
   gem 'debase'
   gem 'ruby-debug-ide'
+  gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
 
 group :development do
