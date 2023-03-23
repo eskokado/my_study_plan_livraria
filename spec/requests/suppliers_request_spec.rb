@@ -33,6 +33,14 @@ RSpec.describe SuppliersController, type: :controller do
       expect(json_response['parts'].first['book']['id']).to eq(book.id)
       expect(json_response['parts'].first['book']['author']['id']).to eq(author.id)
     end
+
+    context 'when supplier not exists' do
+      it 'return status code 404' do
+        get :show, params: { id: -1 }
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 end
 
