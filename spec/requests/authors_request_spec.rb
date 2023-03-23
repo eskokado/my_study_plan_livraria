@@ -43,6 +43,23 @@ RSpec.describe AuthorsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #get_author_with_books' do
+    let!(:author) { Author.create(name: 'Nome do Autor', cpf: Faker::IDNumber.brazilian_cpf) }
+    let!(:book1) { Book.create(title: 'Título do Livro 1', isbn: '978-3-16-148410-0', published_at: '2021-01-01', author_id: author.id) }
+    let!(:book2) { Book.create(title: 'Título do Livro 2', isbn: '978-1-56619-909-4', published_at: '2022-01-01', author_id: author.id) }
+
+    it 'returns author with books and total_books_published' do
+      get :get_author_with_books, params: { id: author.id }
+      json_response = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:success)
+      expect(json_response['author']['id']).to eq(author.id)
+      expect(json_response['books'].length).to eq(2)
+      expect(json_response['total_books_published']).to eq(2)
+    end
+  end
+
 end
 
 
