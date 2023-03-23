@@ -4,6 +4,7 @@ class Assembly < ApplicationRecord
   has_many :assemblies_parts
   has_many :parts, through: :assemblies_parts
   has_many :assemblies_books
+  has_many :books, through: :assemblies_books
 
   scope :with_part_name, -> (part_name) { joins(:parts).where(parts: { name: part_name }) }
 end
