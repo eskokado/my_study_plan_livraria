@@ -116,5 +116,19 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  describe 'GET #get_book_with_assembly_parts_and_costs' do
+    let!(:book) { create(:book) }
+    let!(:assembly) { create(:assembly_with_parts_and_books, books: [book]) }
+
+    before do
+      get :get_book_with_assembly_parts_and_costs, params: { id: book.id }
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+  end
 end
 
