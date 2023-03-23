@@ -21,6 +21,21 @@ class BooksController < ApplicationController
     end
   end
 
+  def get_book_with_assembly_parts_and_costs
+    book_id = params[:id]
+    @book = Book.find(book_id)
+    @assembly = @book.assemblies.includes(:parts).first
+    @total_parts = @assembly.parts.count
+    @total_cost = @assembly.parts.sum(:value)
+
+    render json: {
+      book: @book,
+      assembly: @assembly,
+      total_parts: @total_parts,
+      total_cost: @total_cost
+    }
+  end
+
   def book_params
     return {} unless params.has_key?(:book)
     params.require(:book).permit(:id, :published_at, :isbn, :author_id, :title)
