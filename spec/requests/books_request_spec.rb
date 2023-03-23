@@ -116,5 +116,26 @@ RSpec.describe BooksController, type: :controller do
       end
     end
   end
+
+  describe 'GET #get_book_with_assembly_parts_and_costs' do
+    let!(:book) { create(:book) }
+    let!(:assembly) { create(:assembly_with_parts_and_books, associated_books: [book]) }
+
+    before do
+      get :get_book_with_assembly_parts_and_costs, params: { id: book.id }
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'returns the correct book, assembly, total parts and total cost' do
+      json_response = JSON.parse(response.body)
+      expect(json_response['book']['id']).to eq(book.id)
+      expect(json_response['assembly']['id']).to eq(assembly.id)
+      expect(json_response['total_parts']).to eq(assembly.parts.count)
+      expect(json_response['total_cost'].to_f).to eq(assembly.parts.sum(:value))
+    end
+  end
 end
 

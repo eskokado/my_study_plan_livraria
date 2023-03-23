@@ -9,6 +9,13 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def get_author_with_books
+    @author = Author.includes(:books).find(params[:id])
+    @total_books_published = @author.books.count
+
+    render json: { author: @author, books: @author.books, total_books_published: @total_books_published }
+  end
+
   private
 
   def author_params
