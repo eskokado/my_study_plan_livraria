@@ -14,4 +14,10 @@ class Supplier < ApplicationRecord
       errors.add(:cnpj, "is invalid")
     end
   end
+
+  def self.supplier_with_authors_and_books(supplier_id)
+    joins(parts: { book: :author })
+      .preload(parts: { book: :author })
+      .find(supplier_id)
+  end
 end

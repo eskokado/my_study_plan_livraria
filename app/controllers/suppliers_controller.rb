@@ -25,6 +25,15 @@ class SuppliersController < ApplicationController
     end
   end
 
+  def show
+    begin
+      @supplier = Supplier.supplier_with_authors_and_books(params[:id])
+      render json: @supplier.to_json(include: { parts: { include: { book: { include: :author } } } })
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
+    end
+  end
+
   private
 
   def supplier_params
