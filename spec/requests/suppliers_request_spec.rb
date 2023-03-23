@@ -15,6 +15,25 @@ RSpec.describe SuppliersController, type: :controller do
       end
     end
   end
+
+  describe 'GET #show' do
+    let!(:supplier) { FactoryBot.create(:supplier) }
+    let!(:author) { FactoryBot.create(:author) }
+    let!(:book) { FactoryBot.create(:book, author: author) }
+    let!(:part) { FactoryBot.create(:part, supplier: supplier, book: book) }
+
+    it 'returns a JSON response with the supplier information along with related authors and books' do
+      get :show, params: { id: supplier.id }
+
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+
+      json_response = JSON.parse(response.body)
+      expect(json_response['id']).to eq(supplier.id)
+      expect(json_response['parts'].first['book']['id']).to eq(book.id)
+      expect(json_response['parts'].first['book']['author']['id']).to eq(author.id)
+    end
+  end
 end
 
 RSpec.describe "SuppliersController", type: :request do
