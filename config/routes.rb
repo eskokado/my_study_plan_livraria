@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :parts
   resources :assemblies
+
+
 end

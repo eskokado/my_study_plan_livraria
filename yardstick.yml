@@ -1,0 +1,6 @@
+rules:
+  - class: Yardstick::Rule::Description::Presence
+    enabled: true
+  - class: Yardstick::Rule::ExampleTag::Presence
+    enabled: true
+threshold: 90

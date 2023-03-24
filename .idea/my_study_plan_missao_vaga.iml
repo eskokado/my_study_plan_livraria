@@ -29,17 +29,17 @@
     <orderEntry type="jdk" jdkName="asdf: 3.1.3" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="abstract_class (v1.0.1, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actioncable (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionmailbox (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionpack (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actiontext (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionview (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activejob (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activemodel (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activerecord (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activestorage (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activesupport (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actioncable (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailbox (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionpack (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actiontext (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionview (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activejob (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activemodel (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activestorage (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activesupport (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.4.2, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="awesome_print (v1.9.2, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.16.0, asdf: 3.1.3) [gem]" level="application" />
@@ -87,14 +87,14 @@
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.4.6, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.5, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.6.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.6.3, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.6.4, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.1.1, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack-test (v2.0.2, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rails (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-test (v2.1.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-controller-testing (v1.0.5, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.0.3, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.5.0, asdf: 3.1.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="railties (v7.0.4.2, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="railties (v7.0.4.3, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.1.1, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.11.2, asdf: 3.1.3) [gem]" level="application" />
@@ -113,10 +113,21 @@
     <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.27.0, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-debug-ide (v0.7.3, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.13.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sass-rails (v6.0.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sassc-rails (v2.1.2, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="shoulda-matchers (v4.5.1, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.1.1, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring-watcher-listen (v2.0.1, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.2.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.2, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="swagger-blocks (v3.0.0, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="swagger-docs (v0.2.9, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="swagger-ui (v0.0.2, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="swagger-ui_rails (v0.1.7, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="swagger_ui_engine (v1.1.2, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.2.1, asdf: 3.1.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tilt (v2.1.0, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timeout (v0.3.2, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.6, asdf: 3.1.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v2.4.2, asdf: 3.1.3) [gem]" level="application" />
@@ -166,6 +177,9 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="swagger:install" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
@@ -220,6 +234,9 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="swagger:install" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
@@ -300,6 +317,15 @@
                   <RakeTaskImpl description="" fullCommand="app:update:upgrade_guide_info" id="upgrade_guide_info" />
                 </subtasks>
               </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="assets">
+            <subtasks>
+              <RakeTaskImpl description="Remove old compiled assets" fullCommand="assets:clean[keep]" id="clean[keep]" />
+              <RakeTaskImpl description="Remove compiled assets" fullCommand="assets:clobber" id="clobber" />
+              <RakeTaskImpl description="Load asset compile environment" fullCommand="assets:environment" id="environment" />
+              <RakeTaskImpl description="Compile all the assets named in config.assets.precompile" fullCommand="assets:precompile" id="precompile" />
+              <RakeTaskImpl description="" fullCommand="assets:clean" id="clean" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="db">
@@ -418,6 +444,11 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
+          <RakeTaskImpl id="swagger">
+            <subtasks>
+              <RakeTaskImpl description="Generate Swagger documentation files" fullCommand="swagger:docs" id="docs" />
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl id="time">
             <subtasks>
               <RakeTaskImpl description="List all time zones, list by two-letter country code (`bin/rails time:zones[US]`), or list by UTC offset (`bin/rails time:zones[-8]`)" fullCommand="time:zones[country_or_offset]" id="zones[country_or_offset]" />

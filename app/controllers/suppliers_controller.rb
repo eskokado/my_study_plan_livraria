@@ -1,5 +1,6 @@
 require 'cpf_cnpj'
 class SuppliersController < ApplicationController
+  include SuppliersControllerDocs
   def index
     if params[:author_name]
       @suppliers = Supplier.joins(parts: { book: :author }).where(authors: { name: params[:author_name] }).select("*").distinct

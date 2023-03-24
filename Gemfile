@@ -47,3 +47,10 @@ gem 'cpf_cnpj'
 gem 'isbn', '~> 2.0', '>= 2.0.11'
 
 gem 'iban-tools'
+
+gem 'swagger-blocks'
+gem 'swagger-ui'
+gem 'swagger_ui_engine'
+gem 'swagger-ui_rails'
+gem 'swagger-docs'
+gem 'rswag-api', '~> 2.8'
