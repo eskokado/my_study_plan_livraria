@@ -13,11 +13,19 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem "bootsnap", require: false
 
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
+gem 'rspec-rails'
+gem 'rswag-specs'
+gem 'rspec_api_documentation'
+
+
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails', '~> 4.0.1'
+  # gem 'rspec-rails', '~> 4.0.1'
   gem 'rubocop'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'json_spec'
@@ -47,3 +55,4 @@ gem 'cpf_cnpj'
 gem 'isbn', '~> 2.0', '>= 2.0.11'
 
 gem 'iban-tools'
+
