@@ -1,0 +1,10 @@
+---
+openapi: 3.0.1
+info:
+  title: API de Livros
+  version: v1
+  description: API para gerenciamento de livros
+paths: {}
+servers:
+- url: http://localhost:3000
+  description: Servidor de desenvolvimento
