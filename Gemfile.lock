@@ -237,9 +237,16 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.28)
+      webrick (~> 1.7.0)
+    yard-rspec (0.1)
+      yard
+    yardstick (0.9.9)
+      yard (~> 0.8, >= 0.8.7.2)
     zeitwerk (2.6.7)
 
 PLATFORMS
@@ -271,6 +278,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  yard-rspec
+  yardstick
 
 RUBY VERSION
    ruby 3.1.3p185

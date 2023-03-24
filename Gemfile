@@ -47,3 +47,7 @@ gem 'cpf_cnpj'
 gem 'isbn', '~> 2.0', '>= 2.0.11'
 
 gem 'iban-tools'
+
+gem 'yard-rspec'
+
+gem 'yardstick', group: :development
