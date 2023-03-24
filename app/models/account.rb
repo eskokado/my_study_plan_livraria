@@ -1,12 +1,20 @@
 require 'iban-tools'
+
+# Classe que representa uma conta bancária no sistema
 class Account < ApplicationRecord
+  # Validações
   validates :account_number,  presence: true
   validates :verifier_digit,  presence: true
 
+  # Associações
   belongs_to :supplier
 
+  # Validação personalizada
   validate :validate_verifier_digit
 
+  # Valida o dígito verificador
+  #
+  # @return [void]
   def validate_verifier_digit
     country_code = "BR"
     bank_code = "0036"
