@@ -7,7 +7,7 @@ RSpec.describe PartsController, type: :controller do
     context "with valid params" do
       let(:supplier) { create(:supplier) }
       let(:book) { create(:book_with_parts) }
-      let(:part_attributes) { attributes_for(:part, supplier: supplier, book: book) }
+      let(:part_attributes) { attributes_for(:part, value: 100, supplier: supplier, book: book) }
 
       it "creates a new Part" do
         expect {
@@ -17,6 +17,7 @@ RSpec.describe PartsController, type: :controller do
 
       it "returns a success response with JSON body" do
         post :create, params: { supplier_id: supplier.id, book_id: book.id, part: part_attributes }
+        puts response.body
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(JSON.parse(response.body)['part']['part_number']).to eq(part_attributes[:part_number])
